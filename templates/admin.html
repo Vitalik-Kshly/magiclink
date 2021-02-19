@@ -1,0 +1,8 @@
+{% extends 'base.html' %} {% block content %}
+<h1>{% block title %} Welcome to Admin Panel {% endblock %}</h1>
+{% for record in records %}
+
+<h2>{{ record[0] }}</h2>
+<span class="form-group"> Registered with e-mail {{ record[1] }} and was on site {{ record[2] }} times</span>
+
+<hr> {% endfor %} {% endblock %}
