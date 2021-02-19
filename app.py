@@ -3,7 +3,7 @@ from flask_mail import Mail, Message
 import flask
 from lib.key import Key
 from lib.dbclient import DbClient
-from config import  *
+# from config import  *
 
 app = Flask(__name__)
 app.debug = False
