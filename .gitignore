@@ -3,3 +3,4 @@ lib/_pychache_
 config.py
 _pychache_
 _pychache_/
+.vscode
