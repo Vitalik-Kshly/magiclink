@@ -3,17 +3,19 @@ from flask_mail import Mail, Message
 import flask
 from lib.key import Key
 from lib.dbclient import DbClient
-from boto.s3.connection import S3Connection
 import os
 
 # from config import  *
-s3 = S3Connection(os.environ['conf_email'], os.environ['conf_password'], os.environ['conf_key'])
+
+conf_email = os.environ.get('conf_email', None)
+conf_password = os.environ.get('conf_password', None)
+conf_key = os.environ.get('conf_key', None)
 app = Flask(__name__)
 app.debug = False
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = s3[0]
-app.config['MAIL_PASSWORD'] = s3[1]
+app.config['MAIL_USERNAME'] = conf_email
+app.config['MAIL_PASSWORD'] = conf_password
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 
@@ -24,7 +26,7 @@ key = Key()
 database_client = DbClient('users.db')
 
 def send_email(user, message):
-    msg = Message('Hello', sender = s3[0], recipients = [user])
+    msg = Message('Hello', sender = conf_email, recipients = [user])
     msg.body = "Follow this link to login to the site:\n\n"
     msg.body += message
     mail.send(msg)
@@ -45,7 +47,7 @@ def hello():
 @app.route('/admin')
 def admin():
     key = request.args.get('key')
-    if key == s3[2]:
+    if key == conf_key:
         records = database_client.get_admin_info()
         database_client.db_connection.close()
         return render_template('admin.html', records=records)
