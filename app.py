@@ -1,6 +1,6 @@
 from flask import Flask, config, render_template, request, url_for, flash, redirect
 from flask_mail import Mail, Message
-import flask, sqlparse
+import flask
 from lib.key import Key
 from lib.dbclient import DbClient
 from config import  *
