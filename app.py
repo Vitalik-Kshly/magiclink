@@ -6,7 +6,7 @@ from lib.dbclient import DbClient
 from config import  *
 
 app = Flask(__name__)
-
+app.debug = False
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = conf_email
