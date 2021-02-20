@@ -72,7 +72,9 @@ def register():
     return render_template('register.html')
 
 
-
+@app.route('/')
+def redirect_to_register():
+    redirect(url_for('register'))
 
 if __name__ == '__main__':
     app.run(host= '0.0.0.0')
