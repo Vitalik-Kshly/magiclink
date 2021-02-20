@@ -25,8 +25,16 @@ class DbClient:
     def get_admin_info(self):
         self.db_connection = sqlite3.connect(self.db_name)
         self.cursor = self.db_connection.cursor()   
-        self.cursor.execute("SELECT name, email, enter_count FROM users")
+        self.cursor.execute("SELECT name, email, enter_count, key FROM users")
         return self.cursor.fetchall()
+
+
+    def remove_user(self, key: str):
+        self.db_connection = sqlite3.connect(self.db_name)
+        self.cursor = self.db_connection.cursor()   
+        self.cursor.execute("DELETE FROM users WHERE key = ?", (key, ))
+        self.db_connection.commit()
+        self.db_connection.close()
 
 
     def get_key(self, key: str) -> str:

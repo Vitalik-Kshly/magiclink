@@ -5,11 +5,14 @@ from lib.key import Key
 from lib.dbclient import DbClient
 import os
 
-# from config import  *
 
 conf_email = os.environ.get('conf_email', None)
 conf_password = os.environ.get('conf_password', None)
 conf_key = os.environ.get('conf_key', None)
+
+
+# from config import  * #Used on local machine
+
 
 app = Flask(__name__)
 
@@ -46,15 +49,20 @@ def hello():
         return 'Who are you?'
     
 
-@app.route('/admin')
+@app.route('/admin',  methods=('GET', 'POST'))
 def admin():
     key = request.args.get('key')
+    if request.method =='POST':
+        user_key = request.form['key']
+        database_client.remove_user(user_key)
     if key == conf_key:
         records = database_client.get_admin_info()
         database_client.db_connection.close()
         return render_template('admin.html', records=records)
     else:
         return 'Who are you?'
+    
+
 
 
 @app.route('/register', methods=('GET', 'POST'))

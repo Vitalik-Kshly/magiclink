@@ -1,8 +1,10 @@
 {% extends 'base.html' %} {% block content %}
 <h1>{% block title %} Welcome to Admin Panel {% endblock %}</h1>
 {% for record in records %}
-
-<h2>{{ record[0] }}</h2>
-<span class="form-group"> Registered with e-mail {{ record[1] }} and was on site {{ record[2] }} times</span>
-
+<form method="post">
+    <h2>{{ record[0] }}</h2>
+    <span class="form-group"> Registered with e-mail {{ record[1] }} and was on site {{ record[2] }} times</span>
+    <input type="hidden" name="key" value="{{ record[3] }}">
+    <button type="submit" class="btn btn-primary">Delete</button>
+</form>
 <hr> {% endfor %} {% endblock %}
