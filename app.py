@@ -10,6 +10,7 @@ import os
 conf_email = os.environ.get('conf_email', None)
 conf_password = os.environ.get('conf_password', None)
 conf_key = os.environ.get('conf_key', None)
+print(f'{conf_email} {conf_key} {conf_password}')
 app = Flask(__name__)
 
 app.debug = True
