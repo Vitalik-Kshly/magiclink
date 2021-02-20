@@ -12,7 +12,7 @@ conf_password = os.environ.get('conf_password', None)
 conf_key = os.environ.get('conf_key', None)
 app = Flask(__name__)
 
-app.debug = False
+app.debug = True
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USERNAME'] = conf_email
