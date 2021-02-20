@@ -11,6 +11,7 @@ conf_email = os.environ.get('conf_email', None)
 conf_password = os.environ.get('conf_password', None)
 conf_key = os.environ.get('conf_key', None)
 app = Flask(__name__)
+
 app.debug = False
 app.config['MAIL_SERVER']='smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
@@ -74,4 +75,4 @@ def register():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host= '0.0.0.0')
